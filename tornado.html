@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tornado Gaming - Checkout</title>
+  <link rel="icon" href="tornado-icon.png">
+  <style>
+    /* General Styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .checkout-form {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .checkout-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .checkout-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .checkout-form input, .checkout-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .checkout-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .checkout-form button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <h1>Tornado Gaming</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="services.html">Fixing Services</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </div>
+
+  <!-- Checkout Form -->
+  <div class="checkout-form">
+    <h2>Checkout</h2>
+    <form action="send_email.php" method="POST">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+      <label for="address">Home Address</label>
+      <textarea id="address" name="address" placeholder="Enter your home address" required></textarea>
+
+      <label for="cart-details">Cart Details</label>
+      <textarea id="cart-details" name="cartDetails" readonly>
+        <!-- This will be dynamically populated via JavaScript -->
+      </textarea>
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </div>
+
+  <!-- JavaScript for Cart Details -->
+  <script>
+    // Example: Add cart details dynamically (replace with actual cart data)
+    const cartDetails = `
+      Product 1 - R3500
+      Product 2 - R3500
+    `;
+    document.getElementById("cart-details").value = cartDetails;
+  </script>
+</body>
+</html>
