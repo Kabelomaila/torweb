@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tornado Gaming - Checkout</title>
+  <title>Tornado Gaming</title>
   <link rel="icon" href="tornado-icon.png">
   <style>
     body {
@@ -31,18 +31,44 @@
       text-decoration: underline;
     }
 
-    .checkout-form {
-      max-width: 500px;
-      margin: 50px auto;
-      background: white;
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
       padding: 20px;
+      background: white;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .checkout-form h2 {
+    h1, h2, h3 {
       text-align: center;
-      margin-bottom: 20px;
+    }
+
+    .products, .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .product, .service {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 15px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .product img, .service img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .checkout-form {
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .checkout-form label {
@@ -79,47 +105,90 @@
   <div class="navbar">
     <h1>Tornado Gaming</h1>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="services.html">Fixing Services</a>
-      <a href="cart.html">Cart</a>
+      <a href="#products">Products</a>
+      <a href="#services">Fixing Services</a>
+      <a href="#checkout">Checkout</a>
     </nav>
   </div>
 
-  <!-- Checkout Form -->
-  <div class="checkout-form">
-    <h2>Checkout</h2>
-    <form action="send_email.php" method="POST">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email address" required>
-
-      <label for="phone">Phone Number</label>
-      <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
-
-      <label for="address">Home Address</label>
-      <textarea id="address" name="address" placeholder="Enter your home address" required></textarea>
-
-      <label for="cart-details">Cart Details</label>
-      <textarea id="cart-details" name="cartDetails" readonly>
-        Nacon Revolution Pro 5 Controller - R3,500
-        Nacon Revolution Pro 2 Controller - R3,500
-      </textarea>
-
-      <button type="submit">Submit Order</button>
-    </form>
+  <!-- Products Section -->
+  <div class="container" id="products">
+    <h2>Our Products</h2>
+    <div class="products">
+      <div class="product">
+        <img src="nacon-pro-5.jpg" alt="Nacon Revolution Pro 5">
+        <h3>Nacon Revolution Pro 5</h3>
+        <p>Price: R3,500</p>
+        <button onclick="addToCart('Nacon Revolution Pro 5', 3500)">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="nacon-pro-2.jpg" alt="Nacon Revolution Pro 2">
+        <h3>Nacon Revolution Pro 2</h3>
+        <p>Price: R3,500</p>
+        <button onclick="addToCart('Nacon Revolution Pro 2', 3500)">Add to Cart</button>
+      </div>
+    </div>
   </div>
 
-  <!-- JavaScript for Cart Details -->
+  <!-- Fixing Services Section -->
+  <div class="container" id="services">
+    <h2>Fixing Services</h2>
+    <div class="services">
+      <div class="service">
+        <img src="ps5-repair.jpg" alt="PS5 Controller Repair">
+        <h3>PS5 Controller Repair</h3>
+        <p>We repair all PS5 controller issues.</p>
+        <p>Contact us for pricing: 0678508838 / 0836759612</p>
+      </div>
+      <div class="service">
+        <img src="ps4-repair.jpg" alt="PS4 Controller Repair">
+        <h3>PS4 Controller Repair</h3>
+        <p>We repair all PS4 controller issues.</p>
+        <p>Contact us for pricing: 0678508838 / 0836759612</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Section -->
+  <div class="container" id="checkout">
+    <h2>Checkout</h2>
+    <div class="checkout-form">
+      <form action="send_email.php" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+        <label for="address">Home Address</label>
+        <textarea id="address" name="address" placeholder="Enter your home address" required></textarea>
+
+        <label for="cart">Cart Details</label>
+        <textarea id="cart" name="cart" readonly>Your cart is empty!</textarea>
+
+        <button type="submit">Submit Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
   <script>
-    // You can dynamically populate cart details here if needed.
-    const cartDetails = `
-      Nacon Revolution Pro 5 Controller - R3,500
-      Nacon Revolution Pro 2 Controller - R3,500
-    `;
-    document.getElementById("cart-details").value = cartDetails;
+    const cart = [];
+
+    function addToCart(product, price) {
+      cart.push({ product, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartTextArea = document.getElementById('cart');
+      cartTextArea.value = cart
+        .map(item => `${item.product} - R${item.price}`)
+        .join('\n') || 'Your cart is empty!';
+    }
   </script>
 </body>
 </html>
